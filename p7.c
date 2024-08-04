@@ -1,36 +1,32 @@
-#include<stdio.h>
-int main(){
-float weight[50],profit[50],ratio[50],Totalvalue,temp,capacity,amount;
-int n,i,j;
-printf("Enter the number of items :");
-scanf("%d",&n);
-for (i = 0; i < n; i++) {
-printf("Enter Weight and Profit for item[%d] :\n",i);
-scanf("%f %f", &weight[i], &profit[i]); }
-printf("Enter the capacity of knapsack :\n");
-scanf("%f",&capacity);
-for(i=0;i<n;i++)
-ratio[i]=profit[i]/weight[i];
-for (i = 0; i < n; i++)
-for (j = i + 1; j < n; j++)
-if (ratio[i] < ratio[j]) {
-temp = ratio[j];
-ratio[j] = ratio[i];
-ratio[i] = temp;
-temp = weight[j];
-weight[j] = weight[i];
-weight[i] = temp;
-temp = profit[j];
-profit[j] = profit[i];
-profit[i] = temp; }
-printf("Knapsack problems using Greedy Algorithm:\n");
-for (i = 0; i < n; i++) {
-if (weight[i] > capacity)
-break;
+#include <stdio.h>
+#include <stdbool.h>
+#define MAX_SIZE 100
+void subsetSum(int set[], int subset[], int n, int subSize, int total, int nodeCount, int sum) {
+if (total == sum) {
+printf("Subset found: { ");
+int i;
+for ( i = 0; i < subSize; i++) {
+printf("%d ", subset[i]); }
+printf("}\n");
+return;}
 else {
-Totalvalue = Totalvalue + profit[i];
-capacity = capacity - weight[i]; } }
-if (i < n)
-Totalvalue = Totalvalue + (ratio[i]*capacity);
-printf("\nThe maximum value is :%f\n",Totalvalue);
+int i;
+for (i = nodeCount; i < n; i++) {
+subset[subSize] = set[i];
+subsetSum(set, subset, n, subSize + 1, total + set[i], i + 1, sum); } }}
+int main() {
+int set[MAX_SIZE];
+int subset[MAX_SIZE];
+int n, sum;
+printf("Enter the number of elements in the set: ");
+scanf("%d", &n);
+printf("Enter the elements of the set:\n");
+int i;
+for (i = 0; i < n; i++) {
+scanf("%d", &set[i]); }
+printf("Enter the sum to find subset for: ");
+scanf("%d", &sum);
+printf("Subsets with sum %d:\n", sum);
+subsetSum(set, subset, n, 0, 0, 0, sum);
 return 0;
+}
