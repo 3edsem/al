@@ -34,3 +34,4 @@ for (j = 1; j <= n; j++)
 printf("%d\t", p[i][j]);
 printf("\n");
 }
+}
