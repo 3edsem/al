@@ -52,6 +52,18 @@ primMST(graph,V);
 return 0;
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
 YESHWANTH KALSIRO CODE ...............
 #include <stdio.h>
 #define INF 999
