@@ -1,49 +1,29 @@
-
 #include <stdio.h>
-#include <stdbool.h>
-
-#define MAX_SIZE 100
-
-// Function to find subset with given sum
-void subsetSum(int set[], int subset[], int n, int subSize, int total, int nodeCount, int sum) {
-    if (total == sum) {
-        // Print the subset
-        printf("Subset found: { ");
-        for (int i = 0; i < subSize; i++) {
-            printf("%d ", subset[i]);
-        }
-        printf("}\n");
-        return;
-    } else {
-        // Check the sum of the remaining elements
-        for (int i = nodeCount; i < n; i++) {
-            subset[subSize] = set[i];
-            subsetSum(set, subset, n, subSize + 1, total + set[i], i + 1, sum);
-        }
-    }
-}
-
+#include <stdlib.h>
+#include <time.h>
+void swap(int *a, int *b) {
+int temp = *a; *a = *b; *b = temp;}
+void selectionSort(int arr[], int n) {
+int i, j, min_idx;
+for (i = 0; i < n-1; i++) {
+min_idx = i;
+for (j = i+1; j < n; j++) {
+if (arr[j] < arr[min_idx])
+min_idx = j; }
+swap(&arr[min_idx], &arr[i]); }}
 int main() {
-    int set[MAX_SIZE];
-    int subset[MAX_SIZE];
-    int n, sum;
-
-    // Input the number of elements in the set
-    printf("Enter the number of elements in the set: ");
-    scanf("%d", &n);
-
-    // Input the elements of the set
-    printf("Enter the elements of the set:\n");
-    for (int i = 0; i < n; i++) {
-        scanf("%d", &set[i]);
-    }
-
-    // Input the target sum
-    printf("Enter the sum to find subset for: ");
-    scanf("%d", &sum);
-
-    printf("Subsets with sum %d:\n", sum);
-    subsetSum(set, subset, n, 0, 0, 0, sum);
-
-    return 0;
-}
+int n;
+printf("Enter the number of elements: ");
+scanf("%d", &n);
+int arr[n];
+srand(time(0));
+for (int i = 0; i < n; i++) {
+arr[i] = rand() % 10000; }
+clock_t start, end;
+double cpu_time_used;
+start = clock();
+selectionSort(arr, n);
+end = clock();
+cpu_time_used = ((double) (end - start)) / CLOCKS_PER_SEC;
+printf("Time taken to sort %d elements: %f seconds\n", n, cpu_time_used);
+return 0;}
