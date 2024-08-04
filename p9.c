@@ -27,3 +27,4 @@ end = clock();
 cpu_time_used = ((double) (end - start)) / CLOCKS_PER_SEC;
 printf("Time taken to sort %d elements: %f seconds\n", n, cpu_time_used);
 return 0;
+}
